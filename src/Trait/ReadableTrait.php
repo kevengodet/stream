@@ -30,12 +30,12 @@ trait ReadableTrait
 
     /**
      * Return a line from the stream
-     * 
+     *
      * @see https://www.php.net/splfileobject#splfileobject.constants
-     * 
+     *
      * @param int $flags Combination of SplFileObject::DROP_NEW_LINE and SplFileObject::SKIP_EMPTY
      */
-    public function readLine(int $flags = 0): ?string
+    public function readLine(int $flags = Stream::DROP_NEW_LINE): ?string
     {
         $line = fgets($this->resource);
 
@@ -56,14 +56,14 @@ trait ReadableTrait
 
     /**
      * Read all lines from the stream
-     * 
+     *
      * @see https://www.php.net/splfileobject#splfileobject.constants
-     * 
+     *
      * @param int $flags Combination of SplFileObject::DROP_NEW_LINE and SplFileObject::SKIP_EMPTY
-     * 
-     * @return string[]
+     *
+     * @return iterable string[]
      */
-    public function readLines(int $flags = 0): iterable
+    public function readLines(int $flags = Stream::DROP_NEW_LINE): iterable
     {
         while (!feof($this->resource)) {
             $line = fgets($this->resource);

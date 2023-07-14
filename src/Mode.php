@@ -31,7 +31,7 @@ final class Mode
         // Overwrite already existing file
         OVERWRITE           = 64;
 
-    private static $modes = [
+    private static array $modes = [
         'r'  => self::READ,
         'r+' => self::READ | self::WRITE,
         'w'  =>              self::WRITE | self::CREATE | self::TRUNCATE | self::OVERWRITE,
@@ -49,8 +49,8 @@ final class Mode
 
     public function __construct(string $mode)
     {
-        $isText = false !== strpos($mode, 't');
-        $isBinary = false !== strpos($mode, 'b');
+        $isText = str_contains($mode, 't');
+        $isBinary = str_contains($mode, 'b');
 
         if ($isText && $isBinary) {
             throw new \DomainException('Cannot have text and binary mode at the same time.');
@@ -64,13 +64,13 @@ final class Mode
         // if (str_ends_with($modeWithoutTranslation, '+')) {
         //     $normalizedMode = substr($modeWithoutTranslation, 0, -1);
         // } else {
-            $normalizedMode = $modeWithoutTranslation;
+        $normalizedMode = $modeWithoutTranslation;
         // }
 
         if (!isset(self::$modes[$normalizedMode])) {
             throw new \DomainException("Unknown mode '$mode'");
         }
-var_dump($normalizedMode);
+
         $this->mode = self::$modes[$normalizedMode];
     }
 
@@ -78,7 +78,7 @@ var_dump($normalizedMode);
      * @param resource $stream
      * @return Mode
      */
-    public static function fromStream($stream)
+    public static function fromStream($stream): Mode
     {
         if (!is_resource($stream)) {
             throw new \InvalidArgumentException;
@@ -89,7 +89,7 @@ var_dump($normalizedMode);
         }
 
         $meta = stream_get_meta_data($stream);
-print_r($meta);
+
         return new Mode($meta['mode']);
     }
 

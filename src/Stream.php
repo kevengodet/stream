@@ -75,7 +75,7 @@ final class Stream
         $R = $mode->isReadable();
         $W = $mode->isWritable();
         $S = isset($meta['seekable']) && true === $meta['seekable'];
-var_dump($R, $W, $S);
+
         if (!$R && !$W && !$S) {
             throw InvalidStream::create('It is neither writable, nor seekable, and not even readable.');
         }
