@@ -1,0 +1,23 @@
+{
+    "name": "keven/stream",
+    "description": "Object oriented approach to work with text streams",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Keven Godet",
+            "email": "contact@keven.fr",
+            "homepage": "http://keven.fr",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Keven\\Stream\\": "src"
+        }
+    }
+}
